@@ -736,8 +736,7 @@ function ThemeToggle({ theme, onToggle }) {
         </div>
       </div>
       <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:12,letterSpacing:1,color:t.toggleLabel,transition:"color .3s"}}>
-        {isDark?"LIGHT":"DARK"}
-      </span>
+        {isDark?"DARK":"LIGHT
     </button>
   );
 }
