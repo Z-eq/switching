@@ -753,7 +753,7 @@ export default function CiscoSwitch9300() {
   const [tab, setTab] = useState("chassis");
   const t = THEMES[theme];
 
-  const toggleTheme = () => setTheme(p => { const n=p==="dark"?"light":"dark"; localStorage.setItem("cisco9300_theme",n); return n; });
+  const toggleTheme = () => setTheme(p => { const n=p==="light"?"dark":"light"; localStorage.setItem("cisco9300_theme",n); return n; });
 
   useEffect(()=>{ saveDB({stacks,t:Date.now()}); },[stacks]);
 
