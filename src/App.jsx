@@ -744,7 +744,7 @@ function ThemeToggle({ theme, onToggle }) {
 
 // ─── MAIN APP ─────────────────────────────────────────────────────────────────
 export default function CiscoSwitch9300() {
-  const [theme, setTheme] = useState(() => localStorage.getItem("cisco9300_theme")||"dark");
+  const [theme, setTheme] = useState(() => localStorage.getItem("cisco9300_theme")||"light");
   const [stacks, setStacks] = useState(() => initDB().stacks);
   const [activeStacks, setActiveStacks] = useState([1]);
   const [selectedPort, setSelectedPort] = useState(null);
