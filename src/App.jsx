@@ -736,7 +736,7 @@ function ThemeToggle({ theme, onToggle }) {
         </div>
       </div>
       <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:12,letterSpacing:1,color:t.toggleLabel,transition:"color .3s"}}>
-        {isDark?"DARK":"LIGHT"}
+        {isDark?"LIGHT":"DARK"}
       </span>
     </button>
   );
@@ -753,7 +753,7 @@ export default function CiscoSwitch9300() {
   const [tab, setTab] = useState("chassis");
   const t = THEMES[theme];
 
-  const toggleTheme = () => setTheme(p => { const n=p==="light"?"dark":"light"; localStorage.setItem("cisco9300_theme",n); return n; });
+  const toggleTheme = () => setTheme(p => { const n=p==="dark"?"light":"darkt"; localStorage.setItem("cisco9300_theme",n); return n; });
 
   useEffect(()=>{ saveDB({stacks,t:Date.now()}); },[stacks]);
 
