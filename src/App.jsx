@@ -399,7 +399,7 @@ function TGraph({ label, value, max, color }) {
 function StatusBadge({ status }) {
   const map={up:["#00c853","#00c85322"],down:["#f44336","#f4433622"],disabled:["#78909c","#78909c22"]};
   const [fg,bg]=map[status]||map.disabled;
-  return <div style={{background:bg,border:`1px solid ${fg}`,borderRadius:4,padding:"3px 10px",color:fg,fontSize:10,fontWeight:"bold",fontFamily:"monospace",letterSpacing:1}}>{status.toUpperCase()}</div>;
+  return <div style={{background:bg,border:`1px solid ${fg}`,borderRadius:4,padding:"3px 10px",color:fg,fontSize:12,fontWeight:"bold",fontFamily:"monospace",letterSpacing:1}}>{status.toUpperCase()}</div>;
 }
 
 // ─── PORT DETAIL ──────────────────────────────────────────────────────────────
@@ -411,7 +411,7 @@ function PortDetail({ port, onClose }) {
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16}}>
         <div>
           <div style={{fontFamily:"'Barlow Condensed',sans-serif",color:t.detailTitle,fontSize:22,fontWeight:700,letterSpacing:2}}>{port.id}</div>
-          <div style={{color:t.detailMuted,fontSize:10,marginTop:2}}>{port.description||"No description"}</div>
+          <div style={{color:t.detailMuted,fontSize:12,marginTop:2}}>{port.description||"No description"}</div>
         </div>
         <div style={{display:"flex",gap:8,alignItems:"center"}}>
           <StatusBadge status={port.status}/>
@@ -423,13 +423,13 @@ function PortDetail({ port, onClose }) {
           <div style={{fontSize:20}}>⚠</div>
           <div>
             <div style={{color:unusedClr(ud),fontFamily:"'Barlow Condensed',sans-serif",fontSize:13,fontWeight:700,letterSpacing:1}}>PORT UNUSED</div>
-            <div style={{color:t.detailText,fontSize:10,marginTop:2}}>No activity for <span style={{color:unusedClr(ud),fontWeight:"bold"}}>{fmtDur(ud)}</span> — since {fmtTs(port.unusedSince)}</div>
-            <div style={{color:t.detailMuted,fontSize:10,marginTop:1}}>Consider disabling or reclaiming this port</div>
+            <div style={{color:t.detailText,fontSize:12,marginTop:2}}>No activity for <span style={{color:unusedClr(ud),fontWeight:"bold"}}>{fmtDur(ud)}</span> — since {fmtTs(port.unusedSince)}</div>
+            <div style={{color:t.detailMuted,fontSize:12,marginTop:1}}>Consider disabling or reclaiming this port</div>
           </div>
         </div>
       )}
       {port.status==="down"&&!port.isUnused&&lsa&&(
-        <div style={{background:t.detailDownBg,border:`1px solid ${t.detailDownBorder}`,borderRadius:6,padding:"8px 14px",marginBottom:14,color:t.detailDownColor,fontSize:10}}>
+        <div style={{background:t.detailDownBg,border:`1px solid ${t.detailDownBorder}`,borderRadius:6,padding:"8px 14px",marginBottom:14,color:t.detailDownColor,fontSize:12}}>
           Port went DOWN {fmtDur(lsa)} ago — {fmtTs(port.lastSeen)}
         </div>
       )}
@@ -537,10 +537,10 @@ function SwitchChassis({ stackId, ports, selectedPort, onPortClick }) {
         {/* Right: port counts */}
         <div style={{display:"flex",gap:10,fontFamily:"'Share Tech Mono',monospace"}}>
           <div style={{textAlign:"right"}}>
-            <div style={{color:"#00c853",fontSize:10,fontWeight:"bold"}}>{up}/{ports.length}</div>
+            <div style={{color:"#00c853",fontSize:12,fontWeight:"bold"}}>{up}/{ports.length}</div>
             <div style={{color:t.stackLabelColor,fontSize:6}}>PORTS UP</div>
           </div>
-          {uu>0&&<div style={{textAlign:"right"}}><div style={{color:"#e85530",fontSize:10,fontWeight:"bold"}}>{uu}</div><div style={{color:t.stackLabelColor,fontSize:6}}>UNUSED</div></div>}
+          {uu>0&&<div style={{textAlign:"right"}}><div style={{color:"#e85530",fontSize:12,fontWeight:"bold"}}>{uu}</div><div style={{color:t.stackLabelColor,fontSize:6}}>UNUSED</div></div>}
         </div>
       </div>
 
@@ -706,7 +706,7 @@ function UnusedTable({ allPorts, onPortClick }) {
       {uu.map(p=>{
         const dur=Date.now()-p.unusedSince, c=unusedClr(dur);
         return (
-          <div key={p.id} style={{display:"grid",gridTemplateColumns:"100px 80px 200px 120px 80px",padding:"6px 14px",borderTop:`1px solid ${t.unusedRowBorder}`,cursor:"pointer",transition:"background .1s",fontFamily:"'Share Tech Mono',monospace",fontSize:10}}
+          <div key={p.id} style={{display:"grid",gridTemplateColumns:"100px 80px 200px 120px 80px",padding:"6px 14px",borderTop:`1px solid ${t.unusedRowBorder}`,cursor:"pointer",transition:"background .1s",fontFamily:"'Share Tech Mono',monospace",fontSize:12}}
             onClick={()=>onPortClick(p)}
             onMouseEnter={e=>e.currentTarget.style.background=t.unusedRowHover}
             onMouseLeave={e=>e.currentTarget.style.background="transparent"}
@@ -735,7 +735,7 @@ function ThemeToggle({ theme, onToggle }) {
           {isDark?"🌙":"☀️"}
         </div>
       </div>
-      <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:10,letterSpacing:1,color:t.toggleLabel,transition:"color .3s"}}>
+      <span style={{fontFamily:"'Share Tech Mono',monospace",fontSize:12,letterSpacing:1,color:t.toggleLabel,transition:"color .3s"}}>
         {isDark?"DARK":"LIGHT"}
       </span>
     </button>
@@ -801,11 +801,11 @@ export default function CiscoSwitch9300() {
             <ThemeToggle theme={theme} onToggle={toggleTheme}/>
             {Object.keys(stacks).map(sid=>(
               <button key={sid} onClick={()=>setActiveStacks(prev=>prev.includes(Number(sid))?prev.length>1?prev.filter(s=>s!==Number(sid)):prev:[...prev,Number(sid)])}
-                style={{background:activeStacks.includes(Number(sid))?t.stackBtnBgOn:t.stackBtnBgOff,border:`1px solid ${activeStacks.includes(Number(sid))?t.stackBtnBorderOn:t.stackBtnBorderOff}`,color:activeStacks.includes(Number(sid))?t.stackBtnColorOn:t.stackBtnColorOff,borderRadius:4,padding:"5px 14px",cursor:"pointer",fontSize:10,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,transition:"all .2s"}}>
+                style={{background:activeStacks.includes(Number(sid))?t.stackBtnBgOn:t.stackBtnBgOff,border:`1px solid ${activeStacks.includes(Number(sid))?t.stackBtnBorderOn:t.stackBtnBorderOff}`,color:activeStacks.includes(Number(sid))?t.stackBtnColorOn:t.stackBtnColorOff,borderRadius:4,padding:"5px 14px",cursor:"pointer",fontSize:12,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,transition:"all .2s"}}>
                 STACK {sid}
               </button>
             ))}
-            {Object.keys(stacks).length<5&&<button onClick={addStack} style={{background:"none",border:`1px dashed ${t.stackAddBorder}`,color:t.stackAddColor,borderRadius:4,padding:"5px 14px",cursor:"pointer",fontSize:10,fontFamily:"'Share Tech Mono',monospace"}}>+ STACK</button>}
+            {Object.keys(stacks).length<5&&<button onClick={addStack} style={{background:"none",border:`1px dashed ${t.stackAddBorder}`,color:t.stackAddColor,borderRadius:4,padding:"5px 14px",cursor:"pointer",fontSize:12,fontFamily:"'Share Tech Mono',monospace"}}>+ STACK</button>}
           </div>
         </div>
 
@@ -814,14 +814,14 @@ export default function CiscoSwitch9300() {
         {/* Tabs */}
         <div style={{display:"flex",gap:4,marginBottom:12}}>
           {[["chassis","CHASSIS VIEW"],["unused",`UNUSED PORTS (${allPorts.filter(p=>p.isUnused).length})`],["table","PORT TABLE"]].map(([k,l])=>(
-            <button key={k} onClick={()=>setTab(k)} style={{background:tab===k?t.tabBgOn:t.tabBgOff,border:`1px solid ${tab===k?t.tabBorderOn:t.tabBorderOff}`,color:tab===k?t.tabColorOn:t.tabColorOff,borderRadius:4,padding:"5px 14px",cursor:"pointer",fontSize:10,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,transition:"all .2s"}}>{l}</button>
+            <button key={k} onClick={()=>setTab(k)} style={{background:tab===k?t.tabBgOn:t.tabBgOff,border:`1px solid ${tab===k?t.tabBorderOn:t.tabBorderOff}`,color:tab===k?t.tabColorOn:t.tabColorOff,borderRadius:4,padding:"5px 14px",cursor:"pointer",fontSize:12,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,transition:"all .2s"}}>{l}</button>
           ))}
           {tab==="table"&&<>
             <div style={{flex:1}}/>
             {["all","up","down","disabled","unused"].map(f=>(
               <button key={f} onClick={()=>setFilter(f)} style={{background:filter===f?t.tabBgOn:"transparent",border:`1px solid ${filter===f?t.tabBorderOn:t.tabBorderOff}`,color:filter===f?t.tabColorOn:t.tabColorOff,borderRadius:4,padding:"4px 10px",cursor:"pointer",fontSize:12,fontFamily:"'Share Tech Mono',monospace",transition:"all .2s"}}>{f.toUpperCase()}</button>
             ))}
-            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{background:t.inputBg,border:`1px solid ${t.inputBorder}`,color:t.inputColor,borderRadius:4,padding:"4px 10px",fontSize:10,fontFamily:"'Share Tech Mono',monospace",outline:"none",width:160,transition:"all .3s"}}/>
+            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{background:t.inputBg,border:`1px solid ${t.inputBorder}`,color:t.inputColor,borderRadius:4,padding:"4px 10px",fontSize:12,fontFamily:"'Share Tech Mono',monospace",outline:"none",width:160,transition:"all .3s"}}/>
           </>}
         </div>
 
@@ -849,7 +849,7 @@ export default function CiscoSwitch9300() {
               const ud=p.isUnused?Date.now()-p.unusedSince:null;
               return (
                 <div key={p.id} onClick={()=>handlePort(p)}
-                  style={{display:"grid",gridTemplateColumns:"110px 70px 60px 60px 60px 80px 100px 1fr",padding:"5px 14px",borderTop:`1px solid ${t.tableRowBorder}`,cursor:"pointer",fontSize:10,fontFamily:"'Share Tech Mono',monospace",background:selectedPort?.id===p.id?t.tableRowSelected:"transparent",transition:"background .1s"}}
+                  style={{display:"grid",gridTemplateColumns:"110px 70px 60px 60px 60px 80px 100px 1fr",padding:"5px 14px",borderTop:`1px solid ${t.tableRowBorder}`,cursor:"pointer",fontSize:12,fontFamily:"'Share Tech Mono',monospace",background:selectedPort?.id===p.id?t.tableRowSelected:"transparent",transition:"background .1s"}}
                   onMouseEnter={e=>{if(selectedPort?.id!==p.id)e.currentTarget.style.background=t.tableRowHover;}}
                   onMouseLeave={e=>{if(selectedPort?.id!==p.id)e.currentTarget.style.background="transparent";}}
                 >
