@@ -385,8 +385,8 @@ function TGraph({ label, value, max, color }) {
   return (
     <div style={{flex:1}}>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
-        <span style={{color:t.detailLabel,fontSize:9}}>{label}</span>
-        <span style={{color,fontSize:9}}>{value} Mbps</span>
+        <span style={{color:t.detailLabel,fontSize:12}}>{label}</span>
+        <span style={{color,fontSize:12}}>{value} Mbps</span>
       </div>
       <div style={{height:4,background:t.detailBarBg,borderRadius:2,overflow:"hidden"}}>
         <div style={{height:"100%",width:`${pct}%`,background:`linear-gradient(90deg,${color}88,${color})`,borderRadius:2,transition:"width 1s"}}/>
@@ -436,30 +436,30 @@ function PortDetail({ port, onClose }) {
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:14}}>
         {[["SPEED",`${port.speed} Mbps`,"#2196f3"],["VLAN",port.vlan,"#9c27b0"],["MODE",port.mode.toUpperCase(),"#f59e0b"],["PoE",port.poe?`${port.poeWatts}W`:"Off",port.poe?"#f59e0b":"#78909c"],["UPTIME",port.status==="up"?fmtDur(port.uptime*1000):"—","#00897b"],["LAST CHG",fmtDur(now-port.lastChanged)+" ago","#43a047"]].map(([l,v,c])=>(
           <div key={l} style={{background:t.detailCardBg,border:`1px solid ${t.detailCardBorder}`,borderRadius:4,padding:"6px 8px"}}>
-            <div style={{color:t.detailLabel,fontSize:9,marginBottom:2}}>{l}</div>
+            <div style={{color:t.detailLabel,fontSize:12,marginBottom:2}}>{l}</div>
             <div style={{color:c,fontWeight:"bold",fontSize:12}}>{v}</div>
           </div>
         ))}
       </div>
       {port.status==="up"&&(
         <div style={{marginBottom:14}}>
-          <div style={{color:t.detailLabel,fontSize:9,letterSpacing:1,marginBottom:6}}>THROUGHPUT</div>
+          <div style={{color:t.detailLabel,fontSize:12,letterSpacing:1,marginBottom:6}}>THROUGHPUT</div>
           <div style={{background:t.detailTrafficBg,border:`1px solid ${t.detailTrafficBorder}`,borderRadius:4,padding:"8px 10px",display:"flex",flexDirection:"column",gap:8}}>
             <TGraph label="RX" value={port.rxRate} max={1000} color="#4fc3f7"/>
             <TGraph label="TX" value={port.txRate} max={1000} color="#66bb6a"/>
             <div style={{display:"flex",gap:16,marginTop:2}}>
-              <span style={{color:t.detailLabel,fontSize:9}}>Total RX: <span style={{color:"#4fc3f7"}}>{fmtBytes(port.rxBytes)}</span></span>
-              <span style={{color:t.detailLabel,fontSize:9}}>Total TX: <span style={{color:"#66bb6a"}}>{fmtBytes(port.txBytes)}</span></span>
+              <span style={{color:t.detailLabel,fontSize:12}}>Total RX: <span style={{color:"#4fc3f7"}}>{fmtBytes(port.rxBytes)}</span></span>
+              <span style={{color:t.detailLabel,fontSize:12}}>Total TX: <span style={{color:"#66bb6a"}}>{fmtBytes(port.txBytes)}</span></span>
             </div>
           </div>
         </div>
       )}
       <div style={{marginBottom:14}}>
-        <div style={{color:t.detailLabel,fontSize:9,letterSpacing:1,marginBottom:6}}>ERROR COUNTERS</div>
+        <div style={{color:t.detailLabel,fontSize:12,letterSpacing:1,marginBottom:6}}>ERROR COUNTERS</div>
         <div style={{display:"flex",gap:6}}>
           {[["RX ERR",port.errors.rx],["TX ERR",port.errors.tx],["CRC",port.errors.crc]].map(([l,v])=>(
             <div key={l} style={{flex:1,background:v>0?"#f4433610":t.detailCardBg,border:`1px solid ${v>0?"#f4433630":t.detailCardBorder}`,borderRadius:4,padding:"6px 8px",textAlign:"center"}}>
-              <div style={{color:t.detailLabel,fontSize:9}}>{l}</div>
+              <div style={{color:t.detailLabel,fontSize:12}}>{l}</div>
               <div style={{color:v>0?"#f44336":t.detailMuted,fontSize:14,fontWeight:"bold"}}>{v}</div>
             </div>
           ))}
@@ -467,9 +467,9 @@ function PortDetail({ port, onClose }) {
       </div>
       {port.macTable.length>0&&(
         <div style={{marginBottom:14}}>
-          <div style={{color:t.detailLabel,fontSize:9,letterSpacing:1,marginBottom:6}}>MAC TABLE ({port.macTable.length})</div>
+          <div style={{color:t.detailLabel,fontSize:12,letterSpacing:1,marginBottom:6}}>MAC TABLE ({port.macTable.length})</div>
           <div style={{background:t.detailMacBg,border:`1px solid ${t.detailMacBorder}`,borderRadius:4,overflow:"hidden"}}>
-            <div style={{display:"grid",gridTemplateColumns:"1fr 50px 60px",padding:"4px 8px",background:t.detailMacHead,color:t.detailMacHeadColor,fontSize:9,letterSpacing:1,borderBottom:`1px solid ${t.detailMacBorder}`}}>
+            <div style={{display:"grid",gridTemplateColumns:"1fr 50px 60px",padding:"4px 8px",background:t.detailMacHead,color:t.detailMacHeadColor,fontSize:12,letterSpacing:1,borderBottom:`1px solid ${t.detailMacBorder}`}}>
               <span>MAC</span><span>VLAN</span><span>TYPE</span>
             </div>
             {port.macTable.map((e,i)=>(
@@ -483,14 +483,14 @@ function PortDetail({ port, onClose }) {
         </div>
       )}
       <div>
-        <div style={{color:t.detailLabel,fontSize:9,letterSpacing:1,marginBottom:6}}>PORT EVENT HISTORY</div>
+        <div style={{color:t.detailLabel,fontSize:12,letterSpacing:1,marginBottom:6}}>PORT EVENT HISTORY</div>
         <div style={{maxHeight:150,overflowY:"auto",display:"flex",flexDirection:"column",gap:2}}>
           {port.events.slice(0,15).map((ev,i)=>(
             <div key={i} style={{display:"flex",gap:8,alignItems:"center",background:t.detailEvBg,border:`1px solid ${t.detailEvBorder}`,borderRadius:3,padding:"3px 8px"}}>
               <div style={{width:5,height:5,borderRadius:"50%",flexShrink:0,background:ev.event==="up"?"#00e676":"#ff1744"}}/>
-              <span style={{color:t.detailEvTs,fontSize:9,flex:1}}>{fmtTs(ev.timestamp)}</span>
-              <span style={{color:t.detailEvAgo,fontSize:9}}>{fmtDur(Date.now()-ev.timestamp)} ago</span>
-              <span style={{color:ev.event==="up"?"#00c853":"#f44336",fontSize:9,fontWeight:"bold"}}>{ev.event.toUpperCase()}</span>
+              <span style={{color:t.detailEvTs,fontSize:12,flex:1}}>{fmtTs(ev.timestamp)}</span>
+              <span style={{color:t.detailEvAgo,fontSize:12}}>{fmtDur(Date.now()-ev.timestamp)} ago</span>
+              <span style={{color:ev.event==="up"?"#00c853":"#f44336",fontSize:12,fontWeight:"bold"}}>{ev.event.toUpperCase()}</span>
             </div>
           ))}
         </div>
@@ -698,9 +698,9 @@ function UnusedTable({ allPorts, onPortClick }) {
     <div style={{background:t.unusedBg,border:`1px solid ${t.unusedBorder}`,borderRadius:8,overflow:"hidden",marginTop:4}}>
       <div style={{background:t.unusedHeadBg,padding:"8px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`1px solid ${t.unusedHeadBorder}`}}>
         <div style={{fontFamily:"'Barlow Condensed',sans-serif",color:t.unusedHeadColor,fontSize:14,fontWeight:700,letterSpacing:2}}>⚠ UNUSED PORTS REPORT</div>
-        <div style={{color:t.unusedHeadSub,fontSize:9,fontFamily:"'Share Tech Mono',monospace"}}>{uu.length} ports with no recent activity</div>
+        <div style={{color:t.unusedHeadSub,fontSize:12,fontFamily:"'Share Tech Mono',monospace"}}>{uu.length} ports with no recent activity</div>
       </div>
-      <div style={{display:"grid",gridTemplateColumns:"100px 80px 200px 120px 80px",padding:"4px 14px",background:t.unusedColBg,color:t.unusedColColor,fontSize:9,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,borderBottom:`1px solid ${t.unusedBorder}`}}>
+      <div style={{display:"grid",gridTemplateColumns:"100px 80px 200px 120px 80px",padding:"4px 14px",background:t.unusedColBg,color:t.unusedColColor,fontSize:12,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,borderBottom:`1px solid ${t.unusedBorder}`}}>
         <span>PORT</span><span>VLAN</span><span>UNUSED FOR</span><span>SINCE</span><span>ACTION</span>
       </div>
       {uu.map(p=>{
@@ -714,7 +714,7 @@ function UnusedTable({ allPorts, onPortClick }) {
             <span style={{color:t.unusedPort}}>{p.id}</span>
             <span style={{color:t.unusedVlan}}>{p.vlan}</span>
             <span style={{color:c,fontWeight:"bold"}}>{fmtDur(dur)}</span>
-            <span style={{color:t.unusedDate,fontSize:9}}>{new Date(p.unusedSince).toLocaleDateString()}</span>
+            <span style={{color:t.unusedDate,fontSize:12}}>{new Date(p.unusedSince).toLocaleDateString()}</span>
             <span style={{color:t.unusedAction}}>→ VIEW</span>
           </div>
         );
@@ -795,7 +795,7 @@ export default function CiscoSwitch9300() {
               <div style={{fontFamily:"'Barlow Condensed',sans-serif",color:t.ciscoColor,fontSize:28,fontWeight:900,letterSpacing:4,textShadow:`0 0 30px ${t.ciscoColor}33`}}>CISCO</div>
               <div style={{fontFamily:"'Barlow Condensed',sans-serif",color:t.subColor,fontSize:18,fontWeight:600,letterSpacing:3}}>Catalyst 9300 Series</div>
             </div>
-            <div style={{color:t.metaColor,fontSize:9,fontFamily:"'Share Tech Mono',monospace",letterSpacing:2,marginTop:2}}>NETWORK SWITCH MANAGEMENT INTERFACE // STACK TOPOLOGY // LIVE VIEW</div>
+            <div style={{color:t.metaColor,fontSize:12,fontFamily:"'Share Tech Mono',monospace",letterSpacing:2,marginTop:2}}>NETWORK SWITCH MANAGEMENT INTERFACE // STACK TOPOLOGY // LIVE VIEW</div>
           </div>
           <div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}>
             <ThemeToggle theme={theme} onToggle={toggleTheme}/>
@@ -819,7 +819,7 @@ export default function CiscoSwitch9300() {
           {tab==="table"&&<>
             <div style={{flex:1}}/>
             {["all","up","down","disabled","unused"].map(f=>(
-              <button key={f} onClick={()=>setFilter(f)} style={{background:filter===f?t.tabBgOn:"transparent",border:`1px solid ${filter===f?t.tabBorderOn:t.tabBorderOff}`,color:filter===f?t.tabColorOn:t.tabColorOff,borderRadius:4,padding:"4px 10px",cursor:"pointer",fontSize:9,fontFamily:"'Share Tech Mono',monospace",transition:"all .2s"}}>{f.toUpperCase()}</button>
+              <button key={f} onClick={()=>setFilter(f)} style={{background:filter===f?t.tabBgOn:"transparent",border:`1px solid ${filter===f?t.tabBorderOn:t.tabBorderOff}`,color:filter===f?t.tabColorOn:t.tabColorOff,borderRadius:4,padding:"4px 10px",cursor:"pointer",fontSize:12,fontFamily:"'Share Tech Mono',monospace",transition:"all .2s"}}>{f.toUpperCase()}</button>
             ))}
             <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{background:t.inputBg,border:`1px solid ${t.inputBorder}`,color:t.inputColor,borderRadius:4,padding:"4px 10px",fontSize:10,fontFamily:"'Share Tech Mono',monospace",outline:"none",width:160,transition:"all .3s"}}/>
           </>}
@@ -832,7 +832,7 @@ export default function CiscoSwitch9300() {
             {[["UP / Active","#00c853"],["DOWN","#f44336"],["DISABLED","#78909c"],["UNUSED (14–30d)","#5a8020"],["UNUSED (30–90d)","#c9860a"],["UNUSED (90d+)","#e85530"],["PoE Active","#f59e0b"]].map(([l,c])=>(
               <div key={l} style={{display:"flex",alignItems:"center",gap:5}}>
                 <div style={{width:8,height:8,borderRadius:"50%",background:c}}/>
-                <span style={{color:t.legendColor,fontSize:9,fontFamily:"'Share Tech Mono',monospace"}}>{l}</span>
+                <span style={{color:t.legendColor,fontSize:12,fontFamily:"'Share Tech Mono',monospace"}}>{l}</span>
               </div>
             ))}
           </div>
@@ -842,7 +842,7 @@ export default function CiscoSwitch9300() {
 
         {tab==="table"&&(
           <div style={{background:t.tableBg,border:`1px solid ${t.tableBorder}`,borderRadius:8,overflow:"hidden"}}>
-            <div style={{display:"grid",gridTemplateColumns:"110px 70px 60px 60px 60px 80px 100px 1fr",padding:"6px 14px",background:t.tableHeadBg,color:t.tableHeadColor,fontSize:9,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,borderBottom:`1px solid ${t.tableBorder}`}}>
+            <div style={{display:"grid",gridTemplateColumns:"110px 70px 60px 60px 60px 80px 100px 1fr",padding:"6px 14px",background:t.tableHeadBg,color:t.tableHeadColor,fontSize:12,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1,borderBottom:`1px solid ${t.tableBorder}`}}>
               <span>PORT</span><span>STATUS</span><span>VLAN</span><span>SPEED</span><span>MODE</span><span>PoE</span><span>UPTIME/UNUSED</span><span>DESCRIPTION</span>
             </div>
             {filtered.map(p=>{
