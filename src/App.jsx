@@ -519,9 +519,9 @@ function SwitchChassis({ stackId, ports, selectedPort, onPortClick }) {
       <div style={{background:t.chassisTopBg,borderBottom:`1px solid ${t.chassisTopBorder}`,padding:"5px 12px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         {/* Left: Cisco brand + system LEDs (matches photo: left side of switch) */}
         <div style={{display:"flex",alignItems:"center",gap:10}}>
-          <div style={{fontFamily:"'Barlow Condensed',sans-serif",color:t.ciscoColor,fontSize:15,fontWeight:900,letterSpacing:3,textShadow:`0 0 20px ${t.ciscoColor}33`}}>CISCO</div>
+          <div style={{fontFamily:"'Barlow Condensed',sans-serif",color:t.ciscoColor,fontSize:15,fontWeight:900,letterSpacing:3,textShadow:`0 0 20px ${t.ciscoColor}33`}}>Switch</div>
           <div style={{display:"flex",flexDirection:"column",gap:1}}>
-            <div style={{color:t.modelColor,fontSize:7,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1}}>CATALYST 9300-48P-E</div>
+            <div style={{color:t.modelColor,fontSize:7,fontFamily:"'Share Tech Mono',monospace",letterSpacing:1}}>9300-48P-E</div>
             <div style={{color:t.stackLabelColor,fontSize:6,fontFamily:"'Share Tech Mono',monospace"}}>STACK {stackId}</div>
           </div>
           {/* System LEDs — horizontal row like the real switch */}
